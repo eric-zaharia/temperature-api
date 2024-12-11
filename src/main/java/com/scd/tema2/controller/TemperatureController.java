@@ -33,7 +33,8 @@ public class TemperatureController {
     @PutMapping("/{id}")
     public ResponseEntity<?> updateTemperature(@PathVariable Long id, @RequestBody TemperatureRequest temperatureRequest) {
         if (temperatureRequest == null || temperatureRequest.getIdOras() == null ||
-                temperatureRequest.getValoare() == null) {
+                temperatureRequest.getValoare() == null || temperatureRequest.getId() == null ||
+                (temperatureRequest.getId() != null && !temperatureRequest.getId().equals(id))) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("incomplete request");
         }
 

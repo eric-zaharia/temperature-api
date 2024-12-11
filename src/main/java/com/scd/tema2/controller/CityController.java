@@ -33,7 +33,9 @@ public class CityController {
     public ResponseEntity<?> updateCity(@PathVariable Long id, @RequestBody CityRequest cityRequest) {
         if (cityRequest == null || cityRequest.getNume() == null ||
                 cityRequest.getNume().isEmpty() || cityRequest.getLon() == null ||
-                cityRequest.getLat() == null || cityRequest.getIdTara() == null)
+                cityRequest.getLat() == null || cityRequest.getIdTara() == null ||
+                cityRequest.getId() == null || (cityRequest.getId() != null &&
+                !cityRequest.getId().equals(id)))
         {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Invalid input data");
         }

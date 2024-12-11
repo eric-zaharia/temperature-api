@@ -5,22 +5,33 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Table(name = "Orase")
 public class City {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "country_id", nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "nume_tara", nullable = false)
     private Country country;
 
+    @Column(name = "nume_oras")
     private String name;
+
+    @Column(name = "latitudine")
     private double latitude;
+
+    @Column(name = "longitudine")
     private double longitude;
+
+    @OneToMany(mappedBy = "city", cascade = CascadeType.ALL)
+    private List<Temperature> temperatures;
 
     public Long getId() {
         return id;
@@ -60,6 +71,14 @@ public class City {
 
     public void setLongitude(double longitude) {
         this.longitude = longitude;
+    }
+
+    public List<Temperature> getTemperatures() {
+        return temperatures;
+    }
+
+    public void setTemperatures(List<Temperature> temperatures) {
+        this.temperatures = temperatures;
     }
 }
 

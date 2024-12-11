@@ -1,6 +1,7 @@
 package com.scd.tema2.dto;
 
 public class CityRequest {
+    private Long id;
     private String nume;
     private Long idTara;
     private Double lat;
@@ -36,5 +37,13 @@ public class CityRequest {
 
     public void setLon(Double lon) {
         this.lon = lon;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }

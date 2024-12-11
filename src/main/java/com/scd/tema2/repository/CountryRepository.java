@@ -8,8 +8,8 @@ import java.util.List;
 
 @Repository
 public interface CountryRepository extends JpaRepository<Country, Long> {
-    boolean existsByNume(String name);
-    Country findByNume(String nume);
+    boolean existsByName(String name);
+    Country findByName(String nume);
 
-    List<Country> findAllByNume(String nume);
+    List<Country> findAllByName(String nume);
 }

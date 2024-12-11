@@ -28,11 +28,11 @@ public class CountryService {
 
     public CountryResponse modify(Long id, CountryRequest countryRequest) throws RuntimeException {
         return countryRepository.findById(id).map(country -> {
-            country.setNume(countryRequest.getNume());
-            country.setLat(countryRequest.getLat());
-            country.setLon(countryRequest.getLon());
+            country.setName(countryRequest.getNume());
+            country.setLatitude(countryRequest.getLat());
+            country.setLongitude(countryRequest.getLon());
 
-            List<Country> filter = countryRepository.findAllByNume(countryRequest.getNume()).stream()
+            List<Country> filter = countryRepository.findAllByName(countryRequest.getNume()).stream()
                     .filter(c -> !Objects.equals(c.getId(), country.getId())).toList();
 
             if (!filter.isEmpty()) {
@@ -43,9 +43,9 @@ public class CountryService {
 
             CountryResponse countryResponse = new CountryResponse();
             countryResponse.setId(newCountry.getId().toString());
-            countryResponse.setNume(newCountry.getNume());
-            countryResponse.setLat(newCountry.getLat());
-            countryResponse.setLon(newCountry.getLon());
+            countryResponse.setNume(newCountry.getName());
+            countryResponse.setLat(newCountry.getLatitude());
+            countryResponse.setLon(newCountry.getLongitude());
             return countryResponse;
 
         }).orElse(null);
@@ -53,11 +53,11 @@ public class CountryService {
 
     public Long save(CountryRequest countryRequest) {
         Country country = new Country();
-        country.setNume(countryRequest.getNume());
-        country.setLat(countryRequest.getLat());
-        country.setLon(countryRequest.getLon());
+        country.setName(countryRequest.getNume());
+        country.setLatitude(countryRequest.getLat());
+        country.setLongitude(countryRequest.getLon());
 
-        if (countryRepository.existsByNume(country.getNume())) {
+        if (countryRepository.existsByName(country.getName())) {
             return -1L;
         }
         try {
@@ -74,9 +74,9 @@ public class CountryService {
                 .map(country -> {
                     CountryResponse countryResponse = new CountryResponse();
                     countryResponse.setId(country.getId().toString());
-                    countryResponse.setNume(country.getNume());
-                    countryResponse.setLat(country.getLat());
-                    countryResponse.setLon(country.getLon());
+                    countryResponse.setNume(country.getName());
+                    countryResponse.setLat(country.getLatitude());
+                    countryResponse.setLon(country.getLongitude());
                     return countryResponse;
                 }).collect(Collectors.toList());
     }

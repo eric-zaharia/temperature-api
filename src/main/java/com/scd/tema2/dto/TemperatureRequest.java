@@ -1,6 +1,7 @@
 package com.scd.tema2.dto;
 
 public class TemperatureRequest {
+    private Long id;
     private Long idOras;
     private Double valoare;
 
@@ -18,5 +19,13 @@ public class TemperatureRequest {
 
     public void setValoare(Double valoare) {
         this.valoare = valoare;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }

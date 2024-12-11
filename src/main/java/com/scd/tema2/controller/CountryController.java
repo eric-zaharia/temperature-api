@@ -31,7 +31,8 @@ public class CountryController {
     public ResponseEntity<?> updateCountry(@PathVariable Long id, @RequestBody CountryRequest countryRequest) {
         if (countryRequest == null || countryRequest.getNume() == null ||
                 countryRequest.getNume().isEmpty() || countryRequest.getLon() == null ||
-                countryRequest.getLat() == null)
+                countryRequest.getLat() == null || countryRequest.getId() == null ||
+                (countryRequest.getId() != null && !countryRequest.getId().equals(id)))
         {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Invalid input data");
         }

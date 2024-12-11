@@ -4,41 +4,52 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
+@Table(name = "Tari")
 public class Country {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String nume;
-    private double lat;
-    private double lon;
+    @Column(name = "nume_tara")
+    private String name;
+
+    @Column(name = "latitudine")
+    private double latitude;
+
+    @Column(name = "longitudine")
+    private double longitude;
+
+    @OneToMany(mappedBy = "country", cascade = CascadeType.ALL)
+    private List<City> cities;
 
 
-    public double getLat() {
-        return lat;
+    public double getLatitude() {
+        return latitude;
     }
 
-    public void setLat(double latitude) {
-        this.lat = latitude;
+    public void setLatitude(double latitude) {
+        this.latitude = latitude;
     }
 
-    public String getNume() {
-        return nume;
+    public String getName() {
+        return name;
     }
 
-    public void setNume(String name) {
-        this.nume = name;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public double getLon() {
-        return lon;
+    public double getLongitude() {
+        return longitude;
     }
 
-    public void setLon(double longitude) {
-        this.lon = longitude;
+    public void setLongitude(double longitude) {
+        this.longitude = longitude;
     }
 
     public Long getId() {
@@ -47,5 +58,13 @@ public class Country {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public List<City> getCities() {
+        return cities;
+    }
+
+    public void setCities(List<City> cities) {
+        this.cities = cities;
     }
 }

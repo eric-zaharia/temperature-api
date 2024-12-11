@@ -2,6 +2,7 @@ package com.scd.tema2.dto;
 
 
 public class CountryRequest {
+    private Long id;
     private String nume;
     private Double lat;
     private Double lon;
@@ -28,5 +29,13 @@ public class CountryRequest {
 
     public void setLon(Double lon) {
         this.lon = lon;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }

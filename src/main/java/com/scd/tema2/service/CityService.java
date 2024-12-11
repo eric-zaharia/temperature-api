@@ -103,7 +103,7 @@ public class CityService {
         cityResponse.setLat(city.getLatitude());
         cityResponse.setLon(city.getLongitude());
         cityResponse.setIdTara(countryRepository.
-                findByNume(city.getCountry().getNume()).getId().toString());
+                findByName(city.getCountry().getName()).getId().toString());
 
         return cityResponse;
     }
