@@ -1,0 +1,47 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    environment:
+      - DB_HOST=postgres
+      - DB_PORT=5432
+      - DB_NAME=mydb
+      - DB_USERNAME=user
+      - DB_PASSWORD=pass
+    networks:
+      - app-network
+    depends_on:
+      - postgres
+
+  postgres:
+    image: postgres:15
+    environment:
+      POSTGRES_DB: mydb
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: pass
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    networks:
+      - app-network
+      - db-admin-network
+
+  adminer:
+    image: adminer
+    ports:
+      - "8081:8080"
+    environment:
+      - DB_SERVER=postgres
+    networks:
+      - db-admin-network
+
+networks:
+  app-network:
+  db-admin-network:
+
+volumes:
+  postgres-data:
